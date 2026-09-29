@@ -78,7 +78,7 @@ function App(){
     }
   };
 
-  const logout=()=>{
+  useEffect(()=>{    if(!ready||account)return;    let cancelled=false;    (async()=>{      try{        const data=await readJson(await fetch(api(API_URL,id,'getAccountSettings',token)));        if(!cancelled)setAccount(data);      }catch(e){}    })();    return()=>{cancelled=true};  },[ready,id,token,account]);  const logout=()=>{
     sessionStorage.clear();
     setConnected(false);
     setChat(null);
